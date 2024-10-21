@@ -61,7 +61,7 @@ const login = async (req, res) => {
 
         // Generate JWT token
         const token = jwt.sign({ id: user._id, email: user.email, role: user.role, userName: user.userName }, "secretkey", { expiresIn: "1h" });
-        res.cookie("token", token, { httpOnly: true, secure: false }).status(200).json({
+        res.cookie("token", token, { httpOnly: true, secure: true }).status(200).json({
             message: user.role === "admin" ? "Admin login successful" : "User login successful",
             status: 200,
             user: { userName: user.userName, email: user.email, role: user.role, id:user._id }
